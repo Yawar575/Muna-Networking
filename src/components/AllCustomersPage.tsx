@@ -10,7 +10,7 @@ import {
   PencilLine,
   ChevronDown,
   ChevronUp,
-  Mail,
+  Phone,
   MapPin,
   Receipt,
 } from "lucide-react";
@@ -40,7 +40,7 @@ export function AllCustomersPage() {
     return customers.filter((c) => {
       if (filter !== "All" && c.status !== filter) return false;
       if (!q) return true;
-      return c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q);
+      return c.name.toLowerCase().includes(q) || c.phone.toLowerCase().includes(q);
     });
   }, [customers, query, filter]);
 
@@ -153,7 +153,7 @@ export function AllCustomersPage() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by name or email..."
+                placeholder="Search by name or phone..."
                 className="w-full rounded-xl border border-border bg-card py-2.5 pl-10 pr-3.5 text-sm text-foreground shadow-[var(--shadow-card)] placeholder:text-muted-foreground/70 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/30"
               />
             </div>
@@ -175,7 +175,7 @@ export function AllCustomersPage() {
                 <thead>
                   <tr className="border-b border-border bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
                     <th className="px-4 py-3 text-left font-semibold">Name</th>
-                    <th className="px-4 py-3 text-left font-semibold">Email</th>
+                    <th className="px-4 py-3 text-left font-semibold">Phone</th>
                     <th className="px-4 py-3 text-left font-semibold">Net MB</th>
                     <th className="px-4 py-3 text-left font-semibold">Fees</th>
                     <th className="px-4 py-3 text-left font-semibold">Address</th>
@@ -287,7 +287,7 @@ function BillDialog({
             {customer.status === "Paid" && (
               <div
                 aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 select-none rounded border-2 border-emerald-600 px-2 py-0.5 text-base font-extrabold uppercase tracking-widest text-emerald-600 opacity-70"
+                className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 select-none rounded border-[3px] border-emerald-600 px-3 py-1 text-xl font-extrabold uppercase tracking-widest text-emerald-600 opacity-75"
                 style={{ fontFamily: "Georgia, serif" }}
               >
                 Received
@@ -347,7 +347,7 @@ function FragmentRow({
     <>
       <tr className="border-b border-border last:border-b-0 transition-colors hover:bg-muted/30">
         <td className="px-4 py-3.5 font-bold text-foreground">{c.name}</td>
-        <td className="px-4 py-3.5 text-muted-foreground">{c.email}</td>
+        <td className="px-4 py-3.5 text-muted-foreground">{c.phone}</td>
         <td className="px-4 py-3.5 font-medium text-foreground">{c.netMb} MB</td>
         <td className="px-4 py-3.5 font-bold text-foreground">{c.fees}</td>
         <td className="px-4 py-3.5 text-muted-foreground">{c.address || "—"}</td>
@@ -400,8 +400,8 @@ function FragmentRow({
           <td colSpan={8} className="px-4 py-4">
             <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Mail className="h-4 w-4" />
-                <span className="text-foreground">{c.email}</span>
+                <Phone className="h-4 w-4" />
+                <span className="text-foreground">{c.phone}</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />

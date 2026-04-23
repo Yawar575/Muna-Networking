@@ -336,54 +336,89 @@ function BillRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-type StatTone = "primary" | "foreground" | "emerald" | "rose" | "amber";
+type StatTone = "primary" | "foreground" | "emerald" | "rose";
 
-const TONE_CLASSES: Record<StatTone, { ring: string; text: string; bg: string }> = {
+const TONE_COLORS: Record<StatTone, { stroke: string; track: string; text: string }> = {
   primary: {
-    ring: "border-primary/30",
+    stroke: "stroke-primary",
+    track: "stroke-primary/15",
     text: "text-primary",
-    bg: "bg-primary/10",
   },
   foreground: {
-    ring: "border-foreground/20",
+    stroke: "stroke-foreground",
+    track: "stroke-foreground/15",
     text: "text-foreground",
-    bg: "bg-muted",
   },
   emerald: {
-    ring: "border-emerald-400/50 dark:border-emerald-500/40",
+    stroke: "stroke-emerald-500",
+    track: "stroke-emerald-500/15",
     text: "text-emerald-600 dark:text-emerald-400",
-    bg: "bg-emerald-50 dark:bg-emerald-950/40",
   },
   rose: {
-    ring: "border-rose-400/50 dark:border-rose-500/40",
+    stroke: "stroke-rose-500",
+    track: "stroke-rose-500/15",
     text: "text-rose-600 dark:text-rose-400",
-    bg: "bg-rose-50 dark:bg-rose-950/40",
-  },
-  amber: {
-    ring: "border-amber-400/50 dark:border-amber-500/40",
-    text: "text-amber-600 dark:text-amber-400",
-    bg: "bg-amber-50 dark:bg-amber-950/40",
   },
 };
 
-function CircleStat({
+function RingStat({
   label,
+  percent,
+  display,
   value,
   tone,
 }: {
   label: string;
-  value: number | string;
+  percent: number;
+  value: number;
+  display?: string;
   tone: StatTone;
 }) {
-  const t = TONE_CLASSES[tone];
+  const t = TONE_COLORS[tone];
+  const size = 96;
+  const stroke = 9;
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const clamped = Math.max(0, Math.min(100, percent));
+  const offset = circumference - (clamped / 100) * circumference;
+
   return (
     <div className="flex flex-col items-center gap-2">
-      <div
-        className={`flex h-20 w-20 items-center justify-center rounded-full border-4 ${t.ring} ${t.bg}`}
-      >
-        <span className={`text-xl font-extrabold tabular-nums ${t.text}`}>
-          {value}
-        </span>
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg
+          width={size}
+          height={size}
+          viewBox={`0 0 ${size} ${size}`}
+          className="-rotate-90"
+        >
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            strokeWidth={stroke}
+            className={t.track}
+          />
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            strokeWidth={stroke}
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            className={`${t.stroke} transition-[stroke-dashoffset] duration-500`}
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center leading-tight">
+          <span className={`text-lg font-extrabold tabular-nums ${t.text}`}>
+            {display ?? value}
+          </span>
+          <span className="text-[10px] font-semibold text-muted-foreground">
+            {Math.round(clamped)}%
+          </span>
+        </div>
       </div>
       <span className="text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">
         {label}

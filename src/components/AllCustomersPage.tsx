@@ -18,6 +18,7 @@ import { useCustomers, type Customer, type PaymentStatus } from "@/lib/customers
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { EditCustomerDialog } from "@/components/EditCustomerDialog";
+import paidStamp from "@/assets/paid-stamp.png";
 import {
   Dialog,
   DialogContent,
@@ -309,17 +310,13 @@ function BillDialog({
               </span>
             </div>
             {customer.status === "Paid" && (
-              <div
+              <img
+                src={paidStamp}
+                alt="Paid stamp"
                 aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 select-none rounded border-[3px] border-emerald-600 px-3 py-1 text-xl font-extrabold uppercase tracking-widest text-emerald-600 opacity-75"
-                style={{ fontFamily: "Georgia, serif" }}
-              >
-                Received
-              </div>
+                className="pointer-events-none absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 -rotate-12 select-none opacity-80"
+              />
             )}
-            <p className="mt-4 text-center text-xs text-muted-foreground">
-              Take a screenshot and send to your customer
-            </p>
           </div>
         )}
       </DialogContent>

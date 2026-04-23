@@ -230,28 +230,23 @@ export function AllCustomersPage() {
             </div>
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-muted-foreground">
-            <span>
-              Total: <span className="font-bold text-foreground">{customers.length}</span> customers
-            </span>
-            <span>
-              Total Fees:{" "}
-              <span className="font-bold text-foreground">
-                {stats.totalFees.toLocaleString()}
-              </span>
-            </span>
-            <span>
-              Paid: <span className="font-bold text-emerald-600 dark:text-emerald-400">{stats.paid}</span>
-            </span>
-            <span>
-              Unpaid: <span className="font-bold text-rose-600 dark:text-rose-400">{stats.unpaid}</span>
-            </span>
-            {stats.pending > 0 && (
-              <span>
-                Pending: <span className="font-bold text-amber-600 dark:text-amber-400">{stats.pending}</span>
-              </span>
-            )}
-          </div>
+          <footer className="mt-6 rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+              <CircleStat
+                label="Total Customers"
+                value={customers.length}
+                tone="primary"
+              />
+              <CircleStat
+                label="Total Fees"
+                value={stats.totalFees.toLocaleString()}
+                tone="foreground"
+              />
+              <CircleStat label="Paid" value={stats.paid} tone="emerald" />
+              <CircleStat label="Unpaid" value={stats.unpaid} tone="rose" />
+              <CircleStat label="Pending" value={stats.pending} tone="amber" />
+            </div>
+          </footer>
         </>
       )}
 

@@ -323,6 +323,7 @@ function FragmentRow({
   onEdit,
   onDelete,
   onCycleStatus,
+  onPrint,
 }: {
   c: Customer;
   isOpen: boolean;
@@ -330,6 +331,7 @@ function FragmentRow({
   onEdit: () => void;
   onDelete: () => void;
   onCycleStatus: () => void;
+  onPrint: () => void;
 }) {
   return (
     <>
@@ -354,6 +356,15 @@ function FragmentRow({
               aria-label={isOpen ? "Collapse" : "Expand"}
             >
               {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            </button>
+            <button
+              type="button"
+              onClick={onPrint}
+              className="rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+              aria-label="Print bill"
+              title="Print bill"
+            >
+              <Printer className="h-4 w-4" />
             </button>
             <button
               type="button"

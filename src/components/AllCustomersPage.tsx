@@ -208,7 +208,7 @@ export function AllCustomersPage() {
                             }
                           }}
                           onCycleStatus={() => toggleStatus(c.id)}
-                          onPrint={() => printCustomerBill(c)}
+                          onPrint={() => setBilling(c)}
                         />
                       );
                     })

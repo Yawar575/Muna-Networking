@@ -686,3 +686,85 @@ function FragmentRow({
     </>
   );
 }
+
+function CustomerCard({
+  c,
+  onEdit,
+  onDelete,
+  onCycleStatus,
+  onPrint,
+}: {
+  c: Customer;
+  onEdit: () => void;
+  onDelete: () => void;
+  onCycleStatus: () => void;
+  onPrint: () => void;
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)]">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="truncate text-base font-bold text-foreground">{c.name}</h3>
+          <p className="mt-0.5 truncate text-xs text-muted-foreground">{c.phone}</p>
+        </div>
+        <button type="button" onClick={onCycleStatus} aria-label="Cycle status">
+          <StatusPill status={c.status} />
+        </button>
+      </div>
+
+      <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            Net MB
+          </p>
+          <p className="mt-0.5 font-semibold text-foreground">{c.netMb} MB</p>
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            Fees
+          </p>
+          <p className="mt-0.5 font-bold text-foreground">{c.fees}</p>
+        </div>
+        <div className="col-span-2">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            Address
+          </p>
+          <p className="mt-0.5 break-words text-foreground">{c.address || "—"}</p>
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+            Date
+          </p>
+          <p className="mt-0.5 text-foreground">{formatBillDate(c.date)}</p>
+        </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-end gap-1 border-t border-border pt-3">
+        <button
+          type="button"
+          onClick={onPrint}
+          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+          aria-label="Show bill"
+        >
+          <Receipt className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onClick={onEdit}
+          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          aria-label="Edit customer"
+        >
+          <Pencil className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onClick={onDelete}
+          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+          aria-label="Delete customer"
+        >
+          <Trash2 className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  );
+}

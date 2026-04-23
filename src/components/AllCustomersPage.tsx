@@ -82,16 +82,16 @@ export function AllCustomersPage() {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
       <Toaster richColors position="top-right" />
 
-      <header className="mb-6 flex flex-wrap items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+      <header className="mb-5 flex flex-wrap items-start justify-between gap-3 sm:mb-6">
+        <div className="flex min-w-0 items-start gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground sm:h-12 sm:w-12">
             <Users className="h-5 w-5" />
           </div>
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               All Customers
             </h1>
             <p className="mt-0.5 text-sm text-muted-foreground">
@@ -105,10 +105,11 @@ export function AllCustomersPage() {
             window.dispatchEvent(new Event("customers:changed"));
             toast.success("Refreshed");
           }}
-          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-semibold text-foreground shadow-[var(--shadow-card)] transition-colors hover:bg-muted"
+          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm font-semibold text-foreground shadow-[var(--shadow-card)] transition-colors hover:bg-muted sm:px-3.5"
+          aria-label="Refresh"
         >
           <RefreshCw className="h-4 w-4" />
-          Refresh
+          <span className="hidden sm:inline">Refresh</span>
         </button>
       </header>
 

@@ -287,7 +287,7 @@ function BillDialog({
             {customer.status === "Paid" && (
               <div
                 aria-hidden
-                className="pointer-events-none absolute right-4 top-6 -rotate-12 select-none rounded-md border-4 border-emerald-600 px-3 py-1 text-2xl font-extrabold uppercase tracking-widest text-emerald-600 opacity-80 shadow-sm"
+                className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 select-none rounded-md border-4 border-emerald-600 px-4 py-1.5 text-3xl font-extrabold uppercase tracking-widest text-emerald-600 opacity-70 shadow-sm"
                 style={{ fontFamily: "Georgia, serif" }}
               >
                 Received

@@ -5,7 +5,7 @@ export type PaymentStatus = "Paid" | "Unpaid" | "Pending";
 export type Customer = {
   id: string;
   name: string;
-  email: string;
+  phone: string;
   address: string;
   netMb: number;
   fees: number;
@@ -20,7 +20,13 @@ function read(): Customer[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Customer[]) : [];
+    if (!raw) return [];
+    const list = JSON.parse(raw) as Array<Customer & { email?: string }>;
+    // Migrate legacy "email" field to "phone"
+    return list.map((c) => ({
+      ...c,
+      phone: c.phone ?? c.email ?? "",
+    }));
   } catch {
     return [];
   }

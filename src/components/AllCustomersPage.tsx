@@ -274,7 +274,7 @@ function BillDialog({
             <div className="divide-y divide-border">
               <BillRow label="Name" value={customer.name} />
               <BillRow label="Net MB" value={`${customer.netMb} MB`} />
-              <BillRow label="Date" value={customer.date || "—"} />
+              <BillRow label="Date" value={formatBillDate(customer.date)} />
             </div>
             <div className="mt-4 flex items-center justify-between rounded-xl bg-muted px-4 py-3">
               <span className="text-sm font-semibold text-muted-foreground">

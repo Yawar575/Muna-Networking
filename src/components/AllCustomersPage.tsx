@@ -701,52 +701,52 @@ function CustomerCard({
   onPrint: () => void;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)]">
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
+      {/* Header: name + phone + status pill */}
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="truncate text-base font-bold text-foreground">{c.name}</h3>
-          <p className="mt-0.5 truncate text-xs text-muted-foreground">{c.phone}</p>
+          <h3 className="truncate text-[17px] font-bold leading-tight text-foreground">
+            {c.name}
+          </h3>
+          <p className="mt-1 truncate text-[13px] text-muted-foreground">
+            {c.phone}
+          </p>
         </div>
-        <button type="button" onClick={onCycleStatus} aria-label="Cycle status">
+        <button
+          type="button"
+          onClick={onCycleStatus}
+          aria-label="Cycle status"
+          className="shrink-0"
+        >
           <StatusPill status={c.status} />
         </button>
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-            Net MB
-          </p>
-          <p className="mt-0.5 font-semibold text-foreground">{c.netMb} MB</p>
-        </div>
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-            Fees
-          </p>
-          <p className="mt-0.5 font-bold text-foreground">{c.fees}</p>
-        </div>
-        <div className="col-span-2">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-            Address
-          </p>
-          <p className="mt-0.5 break-words text-foreground">{c.address || "—"}</p>
-        </div>
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-            Date
-          </p>
-          <p className="mt-0.5 text-foreground">{formatBillDate(c.date)}</p>
-        </div>
+      {/* Net MB + Fees */}
+      <div className="mt-5 grid grid-cols-2 gap-4">
+        <CardField label="NET MB" value={`${c.netMb} MB`} />
+        <CardField label="FEES" value={String(c.fees)} bold />
       </div>
 
-      <div className="mt-4 flex items-center justify-end gap-1 border-t border-border pt-3">
+      {/* Address */}
+      <div className="mt-5">
+        <CardField label="ADDRESS" value={c.address || "—"} multiline />
+      </div>
+
+      {/* Date */}
+      <div className="mt-5">
+        <CardField label="DATE" value={formatBillDate(c.date)} />
+      </div>
+
+      {/* Divider + actions */}
+      <div className="mt-5 flex items-center justify-end gap-1 border-t border-border pt-3">
         <button
           type="button"
           onClick={onPrint}
           className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
           aria-label="Show bill"
         >
-          <Receipt className="h-4 w-4" />
+          <Receipt className="h-[18px] w-[18px]" />
         </button>
         <button
           type="button"
@@ -754,7 +754,7 @@ function CustomerCard({
           className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           aria-label="Edit customer"
         >
-          <Pencil className="h-4 w-4" />
+          <Pencil className="h-[18px] w-[18px]" />
         </button>
         <button
           type="button"
@@ -762,9 +762,36 @@ function CustomerCard({
           className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
           aria-label="Delete customer"
         >
-          <Trash2 className="h-4 w-4" />
+          <Trash2 className="h-[18px] w-[18px]" />
         </button>
       </div>
+    </div>
+  );
+}
+
+function CardField({
+  label,
+  value,
+  bold,
+  multiline,
+}: {
+  label: string;
+  value: string;
+  bold?: boolean;
+  multiline?: boolean;
+}) {
+  return (
+    <div>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+        {label}
+      </p>
+      <p
+        className={`mt-1.5 text-[15px] text-foreground ${
+          bold ? "font-bold" : "font-semibold"
+        } ${multiline ? "break-words leading-snug" : "truncate"}`}
+      >
+        {value}
+      </p>
     </div>
   );
 }

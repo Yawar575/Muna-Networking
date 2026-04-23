@@ -421,7 +421,7 @@ function BillDialog({
 
   return (
     <Dialog open={!!customer} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-sm overflow-hidden p-0">
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-sm overflow-hidden p-0">
         {customer && (
           <>
             <DialogHeader className="sr-only">

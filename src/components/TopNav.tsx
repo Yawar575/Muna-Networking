@@ -15,7 +15,7 @@ export function TopNav() {
           <img
             src={munaLogo}
             alt="Muna Networking logo"
-            className="h-16 w-auto sm:h-20 object-contain"
+            className="h-20 w-auto sm:h-24 object-contain"
           />
         </Link>
         <nav className="flex items-center gap-2">

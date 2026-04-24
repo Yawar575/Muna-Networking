@@ -21,7 +21,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { EditCustomerDialog } from "@/components/EditCustomerDialog";
 import paidStamp from "@/assets/paid-stamp.png";
-import munaLogo from "@/assets/muna-logo.png";
+import munaLogo from "@/assets/muna-logo-white.png";
 import billHeaderBg from "@/assets/bill-header-bg.jpg";
 import {
   Dialog,

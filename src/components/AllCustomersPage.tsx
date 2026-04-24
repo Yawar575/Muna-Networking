@@ -21,8 +21,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { EditCustomerDialog } from "@/components/EditCustomerDialog";
 import paidStamp from "@/assets/paid-stamp.png";
-import munaLogo from "@/assets/muna-logo-white.png";
-import billHeaderBg from "@/assets/bill-header-bg.jpg";
+import billBanner from "@/assets/bill-banner.png";
 import {
   Dialog,
   DialogContent,
@@ -430,21 +429,11 @@ function BillDialog({
               <DialogTitle>Muna Networking Bill</DialogTitle>
             </DialogHeader>
             <div ref={slipRef} className="bg-card">
-              <div
-                className="relative flex items-center justify-center px-6 py-6"
-                style={{
-                  backgroundImage: `url(${billHeaderBg})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <div className="absolute inset-0 bg-black/30" />
-                <img
-                  src={munaLogo}
-                  alt="Muna Networking logo"
-                  className="relative z-10 h-28 w-auto object-contain drop-shadow-lg sm:h-32"
-                />
-              </div>
+              <img
+                src={billBanner}
+                alt="Muna Networking"
+                className="block w-full h-auto object-cover"
+              />
               <div className="relative px-6 pb-6 pt-5">
                 <div className="divide-y divide-border">
                   <BillRow label="Name" value={customer.name} />

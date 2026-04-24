@@ -429,11 +429,11 @@ function BillDialog({
               <DialogTitle>Muna Networking Bill</DialogTitle>
             </DialogHeader>
             <div ref={slipRef} className="bg-card">
-              <div className="flex items-center justify-center bg-slate-800 px-6 py-4">
+              <div className="flex items-center justify-center bg-white px-6 py-6">
                 <img
                   src={munaLogo}
                   alt="Muna Networking logo"
-                  className="h-20 w-auto object-contain"
+                  className="h-28 w-auto object-contain sm:h-32"
                 />
               </div>
               <div className="relative px-6 pb-6 pt-5">

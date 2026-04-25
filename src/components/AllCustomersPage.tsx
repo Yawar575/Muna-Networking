@@ -512,7 +512,7 @@ function BillRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-type StatTone = "primary" | "foreground" | "emerald" | "rose";
+type StatTone = "primary" | "foreground" | "emerald" | "rose" | "amber";
 
 const TONE_COLORS: Record<StatTone, { stroke: string; track: string; text: string }> = {
   primary: {
@@ -534,6 +534,11 @@ const TONE_COLORS: Record<StatTone, { stroke: string; track: string; text: strin
     stroke: "stroke-rose-500",
     track: "stroke-rose-500/15",
     text: "text-rose-600 dark:text-rose-400",
+  },
+  amber: {
+    stroke: "stroke-amber-500",
+    track: "stroke-amber-500/15",
+    text: "text-amber-600 dark:text-amber-400",
   },
 };
 
